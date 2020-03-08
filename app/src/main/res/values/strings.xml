@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Password Generator</string>
+    <string name="include_punct">Include Punctuation</string>
+    <string name="length">Password Length?</string>
+    <string name="password">Pa$$w0rd</string>
+    <string name="generate">Generate</string>
+</resources>

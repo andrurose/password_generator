@@ -2,6 +2,6 @@
     <string name="app_name">Password Generator</string>
     <string name="include_punct">Include Punctuation</string>
     <string name="length">Password Length?</string>
-    <string name="password">Pa$$w0rd</string>
+    <string name="password">Pa$$w0rd_W1ll_Sh0w_Up_H3r3…</string>
     <string name="generate">Generate</string>
 </resources>

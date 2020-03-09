@@ -12,7 +12,6 @@ class MainActivity : AppCompatActivity() {
     private val symbolSet : List<Char> = ('!'..'/') + (':'..'@') + ('['..'`') + ('{'..'~')
     private val charSet : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -20,12 +19,10 @@ class MainActivity : AppCompatActivity() {
         generate.setOnClickListener {
             shuffleLetters()
         }
-
     }
 
     private fun shuffleLetters() {
         var randCharSet = ""
-
         if (passwordLength.text.toString() != "") {
             val limiter = passwordLength.text.toString().toInt()
 
@@ -33,21 +30,17 @@ class MainActivity : AppCompatActivity() {
                 for (i in 1..limiter) {
                     randCharSet += charSet.random().toString()
                 }
-            }
-            else {
+            } else {
                 for (i in 1..limiter) {
                     randCharSet += charSet.random().toString() + symbolSet.random().toString()
                 }
             }
-            password.text = randCharSet
-            passwordLength.text.clear()
 
+            passwordLength.text.clear()
         } else {
             val toast = Toast.makeText(applicationContext, "Please enter a number", Toast.LENGTH_SHORT)
             toast.show()
         }
-
-
-
+        password.text = randCharSet
     }
 }

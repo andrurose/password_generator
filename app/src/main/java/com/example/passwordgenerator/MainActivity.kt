@@ -13,6 +13,8 @@ import kotlin.random.Random
 class MainActivity : AppCompatActivity() {
     private val symbolSet : List<Char> = ('!'..'/') + (':'..'@') + ('['..'`') + ('{'..'~')
     private val charSet : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+    private val allChars = charSet + symbolSet
+    
     private var myClipboard: ClipboardManager? = null
     private var myClip: ClipData? = null
 
@@ -41,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                 }
             } else {
                 for (i in 1..limiter) {
-                    randCharSet += charSet.random().toString() + symbolSet.random().toString()
+                    randCharSet += allChars.random().toString()
                 }
             }
 

@@ -1,18 +1,17 @@
 package com.example.passwordgenerator
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.TextView
+import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
+import org.w3c.dom.Node
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
-    private val allChars = ('!'..'~')
+    private val symbolSet : List<Char> = ('!'..'/') + (':'..'@') + ('['..'`') + ('{'..'~')
     private val charSet : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,15 +24,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun shuffleLetters() {
+        var randCharSet = ""
+
         if (passwordLength.text.toString() != "") {
             val limiter = passwordLength.text.toString().toInt()
 
-            val passText = if(!punctuation.isChecked)
-                charSet.joinToString(separator = "")
-            else
-                allChars.joinToString(separator = "")
-
-            password.text = passText
+            if(!punctuation.isChecked) {
+                for (i in 1..limiter) {
+                    randCharSet += charSet.random().toString()
+                }
+            }
+            else {
+                for (i in 1..limiter) {
+                    randCharSet += charSet.random().toString() + symbolSet.random().toString()
+                }
+            }
+            password.text = randCharSet
+            passwordLength.text.clear()
 
         } else {
             val toast = Toast.makeText(applicationContext, "Please enter a number", Toast.LENGTH_SHORT)

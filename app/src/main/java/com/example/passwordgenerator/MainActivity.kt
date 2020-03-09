@@ -1,5 +1,7 @@
 package com.example.passwordgenerator
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -11,13 +13,20 @@ import kotlin.random.Random
 class MainActivity : AppCompatActivity() {
     private val symbolSet : List<Char> = ('!'..'/') + (':'..'@') + ('['..'`') + ('{'..'~')
     private val charSet : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+    private var myClipboard: ClipboardManager? = null
+    private var myClip: ClipData? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        myClipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
+
         generate.setOnClickListener {
             shuffleLetters()
+        }
+        password.setOnClickListener {
+            copyText()
         }
     }
 
@@ -42,5 +51,12 @@ class MainActivity : AppCompatActivity() {
             toast.show()
         }
         password.text = randCharSet
+    }
+
+    private fun copyText() {
+        myClip = ClipData.newPlainText("text", password.text)
+        myClipboard?.primaryClip = myClip
+
+        Toast.makeText(this, "Text Copied", Toast.LENGTH_SHORT).show()
     }
 }
